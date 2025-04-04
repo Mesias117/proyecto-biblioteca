@@ -117,13 +117,15 @@ public class App {
                     String nombreUsuario = scanner.nextLine();
                     System.out.println("Ingrese la identificación del usuario:");
                     String identificacionUsuario = scanner.nextLine();
-                    System.out.println("Ingrese el tipo de usuario (Estudiante, Profesor, Ciudadano):");
-                    String tipoUsuario = scanner.nextLine();
-                
-                    Usuario nuevoUsuario = new Usuario(nombreUsuario, identificacionUsuario, tipoUsuario);
-                    biblioteca.registrarUsuario(nuevoUsuario);
-                
-                    System.out.println("¡Usuario registrado exitosamente!");
+                    if (biblioteca.buscarUsuarioPorIdentificacion(identificacionUsuario) != null) {
+                        System.out.println("Error: La identificación ya está en uso.");
+                    } else {
+                        System.out.println("Ingrese el tipo de usuario (Estudiante, Profesor, Ciudadano):");
+                        String tipoUsuario = scanner.nextLine();
+                        Usuario nuevoUsuario = new Usuario(nombreUsuario, identificacionUsuario, tipoUsuario);
+                        biblioteca.registrarUsuario(nuevoUsuario);
+                        System.out.println("¡Usuario registrado exitosamente!");
+                    }
                     break;
                     /**
                      * Caso para buscar un usuario por su identificación.
