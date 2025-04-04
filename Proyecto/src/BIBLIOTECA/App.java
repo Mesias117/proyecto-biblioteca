@@ -47,34 +47,39 @@ public class App {
              * Solicita al usuario los datos del libro y lo registra en la biblioteca.
              */
                 case 1:
-                    System.out.println("Ingrese el título del libro:");
-                    String titulo = scanner.nextLine();
-                    System.out.println("Ingrese el autor del libro:");
-                    String autor = scanner.nextLine();
-                    System.out.println("Ingrese el año de publicación:");
-                    
-                    if (scanner.hasNextInt()) {
-                        int anioPublicacion = scanner.nextInt();
-                        scanner.nextLine();
+                                  	 System.out.println("Ingrese el título del libro:");
+                     String titulo = scanner.nextLine();
+                     System.out.println("Ingrese el autor del libro:");
+                     String autor = scanner.nextLine();
+                     System.out.println("Ingrese el año de publicación:");
 
-                        System.out.println("Ingrese el ISBN:");
-                        String isbn = scanner.nextLine();
-                        System.out.println("Ingrese el número de ejemplares disponibles:");
+                     if (scanner.hasNextInt()) {
+                         int anioPublicacion = scanner.nextInt();
+                         scanner.nextLine();
 
-                        if (scanner.hasNextInt()) {
-                            int ejemplaresDisponibles = scanner.nextInt();
-                            scanner.nextLine();
+                         System.out.println("Ingrese el ISBN:");
+                         String isbn = scanner.nextLine();
 
-                            biblioteca.registrarLibro(new Libro(titulo, autor, anioPublicacion, isbn, ejemplaresDisponibles));
-                            System.out.println("¡Libro registrado exitosamente!");
-                        } else {
-                            System.out.println("Error: Ingrese un número válido de ejemplares disponibles.");
-                            scanner.nextLine(); 
-                        }
-                    } else {
-                        System.out.println("Error: Ingrese un año de publicación válido (número entero).");
-                        scanner.nextLine(); 
-                    }
+                         if (isbn.matches("\\d+")) {
+                             System.out.println("Ingrese el número de ejemplares disponibles:");
+
+                             if (scanner.hasNextInt()) {
+                                 int ejemplaresDisponibles = scanner.nextInt();
+                                 scanner.nextLine();
+
+                                 biblioteca.registrarLibro(new Libro(titulo, autor, anioPublicacion, isbn, ejemplaresDisponibles));
+                                 System.out.println("¡Libro registrado exitosamente!");
+                             } else {
+                                 System.out.println("Error: Ingrese un número válido de ejemplares disponibles.");
+                                 scanner.nextLine();
+                             }
+                         } else {
+                             System.out.println("Error: El ISBN debe contener solo números.");
+                         }
+                     } else {
+                         System.out.println("Error: Ingrese un año de publicación válido (número entero).");
+                         scanner.nextLine();
+                     }
                     break;
                     /**
                      * Caso para mostrar todos los libros disponibles en la biblioteca.
