@@ -52,15 +52,29 @@ public class App {
                     System.out.println("Ingrese el autor del libro:");
                     String autor = scanner.nextLine();
                     System.out.println("Ingrese el año de publicación:");
-                    int anioPublicacion = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("Ingrese el ISBN:");
-                    String isbn = scanner.nextLine();
-                    System.out.println("Ingrese el número de ejemplares disponibles:");
-                    int ejemplaresDisponibles = scanner.nextInt();
+                    
+                    if (scanner.hasNextInt()) {
+                        int anioPublicacion = scanner.nextInt();
+                        scanner.nextLine();
 
-                    biblioteca.registrarLibro(new Libro(titulo, autor, anioPublicacion, isbn, ejemplaresDisponibles));
-                    System.out.println("¡Libro registrado exitosamente!");
+                        System.out.println("Ingrese el ISBN:");
+                        String isbn = scanner.nextLine();
+                        System.out.println("Ingrese el número de ejemplares disponibles:");
+
+                        if (scanner.hasNextInt()) {
+                            int ejemplaresDisponibles = scanner.nextInt();
+                            scanner.nextLine();
+
+                            biblioteca.registrarLibro(new Libro(titulo, autor, anioPublicacion, isbn, ejemplaresDisponibles));
+                            System.out.println("¡Libro registrado exitosamente!");
+                        } else {
+                            System.out.println("Error: Ingrese un número válido de ejemplares disponibles.");
+                            scanner.nextLine(); 
+                        }
+                    } else {
+                        System.out.println("Error: Ingrese un año de publicación válido (número entero).");
+                        scanner.nextLine(); 
+                    }
                     break;
                     /**
                      * Caso para mostrar todos los libros disponibles en la biblioteca.
